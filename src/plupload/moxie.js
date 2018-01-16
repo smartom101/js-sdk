@@ -3332,11 +3332,15 @@ define("moxie/core/utils/Mime", [
 
 
 		extList2mimes: function (filters, addMissingExtensions) {
-			var self = this, ext, i, ii, type, mimes = [];
+			var self = this, ext, i, ii, type, mimes = [], tkExtent;
 			
 			// convert extensions to mime types list
 			for (i = 0; i < filters.length; i++) {
 				ext = filters[i].extensions.toLowerCase().split(/\s*,\s*/);
+				tkExtent = filters[i].tkParameter;
+				if (tkExtent == "tkImage") {
+					return ['image/jpeg'];
+				}
 
 				for (ii = 0; ii < ext.length; ii++) {
 					
@@ -3403,7 +3407,7 @@ define("moxie/core/utils/Mime", [
 			
 			accept.push({
 				title: I18n.translate('Files'),
-				extensions: exts.length ? exts.join(',') : '*'
+				extensions: exts.length ? exts.join(',') : '*',
 			});
 			
 			// save original mimes string
