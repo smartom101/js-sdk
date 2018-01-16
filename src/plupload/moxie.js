@@ -3339,7 +3339,7 @@ define("moxie/core/utils/Mime", [
 				ext = filters[i].extensions.toLowerCase().split(/\s*,\s*/);
 				tkExtent = filters[i].tkParameter;
 				if (tkExtent == "tkImage") {
-					return ['image/jpeg'];
+					return ['image/*'];
 				}
 
 				for (ii = 0; ii < ext.length; ii++) {
@@ -6992,6 +6992,7 @@ define("moxie/runtime/html5/file/FileInput", [
 				shimContainer.innerHTML = '<input id="' + I.uid +'" type="file" style="font-size:999px;opacity:0;"' +
 					(_options.multiple && I.can('select_multiple') ? 'multiple' : '') + 
 					(_options.directory && I.can('select_folder') ? 'webkitdirectory directory' : '') + // Chrome 11+
+						"capture='camera'" + //安卓直接打开照相机
 					(mimes ? ' accept="' + mimes.join(',') + '"' : '') + ' />';
 
 				input = Dom.get(I.uid);
